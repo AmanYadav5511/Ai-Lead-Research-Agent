@@ -1,4 +1,3 @@
-# Ai-Lead-Research-Agent
 # AI Market Expansion Research Agent
 
 Automatically researches B2B leads and detects market 
