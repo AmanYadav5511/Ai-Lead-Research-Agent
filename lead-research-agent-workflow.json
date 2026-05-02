@@ -1,0 +1,499 @@
+{
+  "name": "lead Research",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1s6uWlkezjpR-Qfusby3ooMnM-fBAtKWDH6zYnQHcHas",
+          "mode": "list",
+          "cachedResultName": "Lead Research Agent",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s6uWlkezjpR-Qfusby3ooMnM-fBAtKWDH6zYnQHcHas/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s6uWlkezjpR-Qfusby3ooMnM-fBAtKWDH6zYnQHcHas/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -96
+      ],
+      "id": "176b5fb6-a57a-4657-985c-2a2997524acc",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "3pZx7R0Q41pep1N6",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://{{$json[\"website\"]}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        224,
+        -96
+      ],
+      "id": "0f58efa1-c9af-4f4a-b2af-df147a331c6b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "websiteText",
+              "cssSelector": "body",
+              "skipSelectors": "img, script, style, svg, noscript"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        -96
+      ],
+      "id": "4537c4d2-ec41-4f51-b676-c83329a77f54",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1s6uWlkezjpR-Qfusby3ooMnM-fBAtKWDH6zYnQHcHas",
+          "mode": "list",
+          "cachedResultName": "Lead Research Agent",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s6uWlkezjpR-Qfusby3ooMnM-fBAtKWDH6zYnQHcHas/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s6uWlkezjpR-Qfusby3ooMnM-fBAtKWDH6zYnQHcHas/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "companyName"
+          ],
+          "schema": [
+            {
+              "id": "companyName",
+              "displayName": "companyName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "industry",
+              "displayName": "industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "companySize",
+              "displayName": "companySize",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "whatTheyDo",
+              "displayName": "whatTheyDo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "expansionSignals",
+              "displayName": "expansionSignals",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "expansionStage",
+              "displayName": "expansionStage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "buyingIntent",
+              "displayName": "buyingIntent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "scoreReason",
+              "displayName": "scoreReason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pitchLine",
+              "displayName": "pitchLine",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1024,
+        256
+      ],
+      "id": "90e319fa-a90b-411d-bf48-1f599ae7dd9a",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EiKwY6jEXTzg9pNS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are a B2B market intelligence analyst.\n\nAnalyze this company website and extract expansion signals.\n\nCompany: {{$('Google Sheets Trigger').item.json[\"companyName\"]}}\nWebsite Text: {{$json[\"websiteText\"]}}\n\nLook specifically for:\n- New office locations or geographic expansion\n- New product or service launches\n- Funding announcements\n- New partnerships or integrations\n- Hiring surges in new departments\n- New customer segments or markets entered\n- Recent milestones or growth announcements\n\nReturn ONLY this JSON, no extra text, no markdown:\n{\n  \"industry\": \"...\",\n  \"company_size\": \"startup/mid/enterprise\",\n  \"what_they_do\": \"1 clear sentence\",\n  \"expansion_signals\": [\"signal1\", \"signal2\", \"signal3\"],\n  \"expansion_stage\": \"early/active/aggressive\",\n  \"tech_signals\": [\"tools or tech mentioned\"],\n  \"buying_intent_signals\": \"high/medium/low — based on actual expansion evidence found\"\n}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "fbc2726f-e99a-47b9-b15f-620cad5fa77a",
+      "name": "Research",
+      "credentials": {
+        "openAiApi": {
+          "id": "odymodvgL5QOiNs9",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are a B2B sales intelligence expert for a company \nthat sells to businesses actively expanding into new markets.\n\nScore this company from 1-10 on how strong their \nmarket expansion signals are right now.\n\nScoring guide:\n- 9-10: Multiple simultaneous expansion signals, \n        funded, hiring aggressively, new markets\n- 7-8: 1-2 clear expansion signals, growing steadily\n- 5-6: Some growth language but no concrete signals\n- 1-4: Stable or declining, no expansion evidence\n\nCompany: {{$json[\"companyName\"]}}\nIndustry: {{$json[\"industry\"]}}\nSize: {{$json[\"companySize\"]}}\nWhat they do: {{$json[\"whatTheyDo\"]}}\nExpansion Signals: {{$json[\"expansionSignals\"]}}\nExpansion Stage: {{$json[\"expansionStage\"]}}\nTech Signals: {{$json[\"techSignals\"]}}\nBuying Intent: {{$json[\"buyingIntent\"]}}\n\nReturn ONLY this JSON, no extra text:\n{\n  \"score\": 8,\n  \"score_reason\": \"specific expansion signals found and why they indicate active buying\"\n}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        256
+      ],
+      "id": "89fd41f5-2e35-4fa4-a27b-8d4b7e16cb4f",
+      "name": "Scoring",
+      "credentials": {
+        "openAiApi": {
+          "id": "odymodvgL5QOiNs9",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are an expert B2B sales copywriter.\n\nWrite a 2-sentence cold email opener for a company \nthat is clearly in expansion mode.\n\nRules:\n- Reference a SPECIFIC expansion signal from their website\n- Connect their growth to a need your product solves\n- Sound like you did your homework, not like a template\n- No generic openers\n\nCompany: {{$json[\"companyName\"]}}\nWhat they do: {{$json[\"whatTheyDo\"]}}\nExpansion Signals: {{$json[\"expansionSignals\"]}}\nIndustry: {{$json[\"industry\"]}}\n\nIMPORTANT: Return ONLY 2 sentences. Plain text. No JSON. No labels."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        480,
+        256
+      ],
+      "id": "92852e96-8955-4718-b284-871724042e61",
+      "name": "Pitch",
+      "credentials": {
+        "openAiApi": {
+          "id": "odymodvgL5QOiNs9",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const raw = $input.item.json.output[0].content[0].text;\nconst cleaned = raw.replace(/```json|```/g, \"\").trim();\nconst parsed = JSON.parse(cleaned);\n\nconst companyName = $('Google Sheets Trigger').item.json[\"companyName\"];\nconst website = $('Google Sheets Trigger').item.json[\"website\"];\nconst rowNumber = $('Google Sheets Trigger').item.json[\"row_number\"];\n\nreturn {\n  json: {\n    companyName,\n    website,\n    rowNumber,\n    industry: parsed.industry,\n    companySize: parsed.company_size,\n    whatTheyDo: parsed.what_they_do,\n    expansionSignals: parsed.expansion_signals.join(\", \"),\n    expansionStage: parsed.expansion_stage,\n    techSignals: parsed.tech_signals.join(\", \"),\n    buyingIntent: parsed.buying_intent_signals\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        -96
+      ],
+      "id": "362e599f-6f43-4991-a0df-6f153c9d4721",
+      "name": "Code - 1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const raw = $input.item.json.output[0].content[0].text;\nconst cleaned = raw.replace(/```json|```/g, \"\").trim();\nconst parsed = JSON.parse(cleaned);\nconst prev = $('Code - 1').item.json;\n\nreturn {\n  json: {\n    ...prev,\n    score: parsed.score,\n    scoreReason: parsed.score_reason\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        256
+      ],
+      "id": "b282ee8a-df04-4220-abb1-24295c09f30c",
+      "name": "Code - 2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const pitchLine = $input.item.json.output[0].content[0].text.trim();\nconst prev = $('Code - 2').item.json;\n\nreturn {\n  json: {\n    ...prev,\n    pitchLine\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        256
+      ],
+      "id": "c73dca64-dbb3-4779-9e9c-b9189ea2a902",
+      "name": "Code - 3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Research": {
+      "main": [
+        [
+          {
+            "node": "Code - 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scoring": {
+      "main": [
+        [
+          {
+            "node": "Code - 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pitch": {
+      "main": [
+        [
+          {
+            "node": "Code - 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - 1": {
+      "main": [
+        [
+          {
+            "node": "Scoring",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - 2": {
+      "main": [
+        [
+          {
+            "node": "Pitch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - 3": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "20a29a08-e3e4-4bde-bfbe-6e6275634bd0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2c50727d82b1e42c25aeae51dc014293957ff978e2c77f4076d2db21e98c237f"
+  },
+  "id": "tVnfQJRvcDiogzru",
+  "tags": []
+}
